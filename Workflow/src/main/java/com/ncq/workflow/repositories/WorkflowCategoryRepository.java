@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.ncq.workflow.entities.WorkflowCategory;
 
 @Repository
-public interface WorkflowCategoryRepository extends JpaRepository<WorkflowCategory, Long>{
-
+public interface WorkflowCategoryRepository extends JpaRepository<WorkflowCategory, Long> {
 }

@@ -1,25 +1,25 @@
 package com.ncq.workflow.controlers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ncq.workflow.entities.WorkflowCategory;
-import com.ncq.workflow.repositories.WorkflowCategoryRepository;
-import com.ncq.workflow.repositories.WorkflowRepository;
+import com.ncq.workflow.services.WorkflowCategoryService;
 
 @RestController
-public class WorkflowCategoryController {
+@RequestMapping("/api/workflowcategories")
+public class WorkflowCategoryController extends RootController {
 
 	@Autowired
-	WorkflowRepository workflowRepository;
-	
-	@Autowired
-	WorkflowCategoryRepository WorkflowCategoryRepository;
-	
-	@GetMapping(path = "/workflowcategories")
-	public ResponseEntity getAll() {
-		return ResponseEntity.ok(WorkflowCategoryRepository.findAll());
+	WorkflowCategoryService WorkflowCategoryService;
+
+	@GetMapping(path = "")
+	public ResponseEntity<List<WorkflowCategory>> getAll() {
+		return ResponseEntity.ok(WorkflowCategoryService.findAllWorkflowCategory());
 	}
 }

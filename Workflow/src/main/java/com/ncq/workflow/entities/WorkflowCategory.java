@@ -1,18 +1,17 @@
 package com.ncq.workflow.entities;
 
 import java.security.Timestamp;
-import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class WorkflowCategory {
@@ -24,6 +23,7 @@ public class WorkflowCategory {
 	private String name;
 	private String description;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp createAt;
 	private Timestamp updateAt;
 
@@ -31,8 +31,8 @@ public class WorkflowCategory {
 
 	@ManyToOne
 	private WorkflowCategory parentCategory;
-	
-	@ManyToMany(mappedBy = "workflowCategories")
+
+	@ManyToMany
 	private Set<Workflow> workflows;
 
 	public Long getIdCategory() {
@@ -91,6 +91,7 @@ public class WorkflowCategory {
 		this.parentCategory = parentCategory;
 	}
 
+	@JsonIgnore
 	public Set<Workflow> getWorkflows() {
 		return workflows;
 	}
@@ -98,5 +99,5 @@ public class WorkflowCategory {
 	public void setWorkflows(Set<Workflow> workflows) {
 		this.workflows = workflows;
 	}
-	
+
 }

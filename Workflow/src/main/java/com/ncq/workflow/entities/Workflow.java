@@ -3,19 +3,12 @@ package com.ncq.workflow.entities;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 public class Workflow {
@@ -31,10 +24,6 @@ public class Workflow {
 	private Integer status;
 
 	@ManyToMany
-	@JoinTable(name = "workflow_workflowcategory", joinColumns = @JoinColumn(name = "workflow_id"), inverseJoinColumns = @JoinColumn(name = "workflow_category_id"))
-	private Set<WorkflowCategory> workflowCategories;
-
-	@ManyToMany
 	private Set<Workflow> associateWorkflows;
 
 	public Workflow() {
@@ -46,12 +35,11 @@ public class Workflow {
 	}
 
 	public Workflow(Long idWorkflow, String name, String description, @Min(1) @Max(5) Integer status,
-			Set<WorkflowCategory> workflowCategories, Set<Workflow> associateWorkflows) {
+			Set<Workflow> associateWorkflows) {
 		this.idWorkflow = idWorkflow;
 		this.name = name;
 		this.description = description;
 		this.status = status;
-		this.workflowCategories = workflowCategories;
 		this.associateWorkflows = associateWorkflows;
 	}
 
@@ -85,14 +73,6 @@ public class Workflow {
 
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-
-	public Set<WorkflowCategory> getWorkflowCategories() {
-		return workflowCategories;
-	}
-
-	public void setWorkflowCategories(Set<WorkflowCategory> workflowCategories) {
-		this.workflowCategories = workflowCategories;
 	}
 
 	public Set<Workflow> getAssociateWorkflows() {
