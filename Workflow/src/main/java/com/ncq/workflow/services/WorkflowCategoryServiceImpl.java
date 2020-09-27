@@ -11,8 +11,12 @@ import com.ncq.workflow.repositories.WorkflowCategoryRepository;
 @Service
 public class WorkflowCategoryServiceImpl implements WorkflowCategoryService {
 
+	private final WorkflowCategoryRepository workflowCategoryRepository;
+
 	@Autowired
-	private WorkflowCategoryRepository workflowCategoryRepository;
+	public WorkflowCategoryServiceImpl(WorkflowCategoryRepository workflowCategoryRepository) {
+		this.workflowCategoryRepository = workflowCategoryRepository;
+	}
 
 	@Override
 	public List<WorkflowCategory> findAllWorkflowCategoryByIds(List<Long> ids) {

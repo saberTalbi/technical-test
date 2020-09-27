@@ -13,7 +13,7 @@ import com.ncq.workflow.services.WorkflowCategoryService;
 
 @RestController
 @RequestMapping("/api/workflowcategories")
-public class WorkflowCategoryController extends RootController {
+public class WorkflowCategoryController {
 
 	@Autowired
 	WorkflowCategoryService WorkflowCategoryService;

@@ -11,18 +11,22 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.ncq.workflow.criteria.WorkflowBuilder;
 import com.ncq.workflow.entities.Workflow;
+import com.ncq.workflow.entitiesbuilder.WorkflowBuilder;
 import com.ncq.workflow.repositories.WorkflowRepository;
 
 @Service
 public class WorkflowServiceImpl implements WorkflowService {
 
-	@Autowired
-	private WorkflowRepository workflowRepository;
+	private final WorkflowRepository workflowRepository;
+
+	private final WorkflowCategoryService workflowCategoryService;
 
 	@Autowired
-	private WorkflowCategoryServiceImpl workflowCategoryService;
+	public WorkflowServiceImpl(WorkflowRepository workflowRepository, WorkflowCategoryService workflowCategoryService) {
+		this.workflowRepository = workflowRepository;
+		this.workflowCategoryService = workflowCategoryService;
+	}
 
 	@Override
 	public Page<Workflow> findAllWithOptionalFilter(List<Long> ids, String name, Integer status, int page,

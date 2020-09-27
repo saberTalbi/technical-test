@@ -2,7 +2,6 @@ package com.ncq.workflow.controlers;
 
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,27 +11,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ncq.workflow.entities.Workflow;
-import com.ncq.workflow.repositories.WorkflowCategoryRepository;
-import com.ncq.workflow.repositories.WorkflowRepository;
 import com.ncq.workflow.services.WorkflowService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/workflows")
-public class WorkflowController extends RootController {
+public class WorkflowController {
 
-	@Autowired
-	WorkflowRepository workflowRepository;
-
-	@Autowired
-	WorkflowCategoryRepository WorkflowCategoryRepository;
-
-	@Autowired
 	WorkflowService workflowService;
 
+	public WorkflowController(WorkflowService workflowService) {
+		this.workflowService = workflowService;
+	}
+
 	@GetMapping(path = "/{page}/{size}")
-	@ApiOperation(value = "get all publication", notes = "this api return all publication")
+	@ApiOperation(value = "get all workflow with optional filter", notes = "this api return all workflow with given filters")
 	public ResponseEntity<Page<Workflow>> getAll(@PathVariable(value = "page") Integer page,
 			@PathVariable(value = "size") Integer size,
 			@RequestParam(value = "ids", required = false) ArrayList<Long> ids,

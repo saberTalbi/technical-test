@@ -29,6 +29,18 @@ public class WorkflowCategory {
 
 	private boolean enabled;
 
+	public WorkflowCategory(Long idCategory, String name, String description, Timestamp createAt, Timestamp updateAt,
+			boolean enabled, WorkflowCategory parentCategory, Set<Workflow> workflows) {
+		this.idCategory = idCategory;
+		this.name = name;
+		this.description = description;
+		this.createAt = createAt;
+		this.updateAt = updateAt;
+		this.enabled = enabled;
+		this.parentCategory = parentCategory;
+		this.workflows = workflows;
+	}
+
 	@ManyToOne
 	private WorkflowCategory parentCategory;
 
