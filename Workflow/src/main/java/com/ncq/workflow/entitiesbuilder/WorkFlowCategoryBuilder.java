@@ -1,9 +1,7 @@
 package com.ncq.workflow.entitiesbuilder;
 
 import java.security.Timestamp;
-import java.util.Set;
 
-import com.ncq.workflow.entities.Workflow;
 import com.ncq.workflow.entities.WorkflowCategory;
 
 public class WorkFlowCategoryBuilder {
@@ -11,12 +9,12 @@ public class WorkFlowCategoryBuilder {
 
 	private String name;
 	private String description;
+	private Byte[] logo;
 	private Timestamp createAt;
 	private Timestamp updateAt;
 
 	private boolean enabled;
 	private WorkflowCategory parentCategory;
-	private Set<Workflow> workflows;
 
 	public WorkFlowCategoryBuilder id(Long idCategory) {
 		this.idCategory = idCategory;
@@ -53,14 +51,8 @@ public class WorkFlowCategoryBuilder {
 		return this;
 	}
 
-	public WorkFlowCategoryBuilder setWorkflows(Set<Workflow> workflows) {
-		this.workflows = workflows;
-		return this;
-	}
-
 	public WorkflowCategory build() {
-		return new WorkflowCategory(idCategory, name, description, createAt, updateAt, enabled, parentCategory,
-				workflows);
+		return new WorkflowCategory(idCategory, name, description, logo, createAt, updateAt, enabled, parentCategory);
 
 	}
 }

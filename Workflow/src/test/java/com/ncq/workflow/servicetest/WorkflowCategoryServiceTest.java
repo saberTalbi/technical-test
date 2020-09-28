@@ -34,7 +34,7 @@ public class WorkflowCategoryServiceTest {
 		when(workflowCategoryRepository.findAll()).thenReturn(workflowCategoryList);
 
 		List<WorkflowCategory> result = workflowCategoryService.findAllWorkflowCategory();
-		assert (result != null && result.containsAll(workflowCategoryList) && workflowCategoryList.containsAll(result));
+		assert (result != null && result.equals(workflowCategoryList));
 
 		final List<Long> ids = new ArrayList();
 		ids.add(new Long(1));

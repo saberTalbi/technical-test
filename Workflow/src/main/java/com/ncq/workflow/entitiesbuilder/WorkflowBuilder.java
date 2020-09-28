@@ -2,15 +2,22 @@ package com.ncq.workflow.entitiesbuilder;
 
 import java.util.Set;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import com.ncq.workflow.entities.Workflow;
+import com.ncq.workflow.entities.WorkflowCategory;
 
 public class WorkflowBuilder {
 
 	private Long idWorkflow;
-	private Integer status;
+	private @Max(5) @Min(1) Integer status;
 	private String name;
+
 	private Set<Workflow> associateWorkflows;
 	private String description;
+	private @NotEmpty Set<WorkflowCategory> workflowCategories;
 
 	public WorkflowBuilder name(String name) {
 		this.name = name;
@@ -37,9 +44,17 @@ public class WorkflowBuilder {
 		return this;
 	}
 
-	public Workflow build() {
-
-		return new Workflow(idWorkflow, name, description, status, associateWorkflows);
+	public @NotEmpty Set<WorkflowCategory> getWorkflowCategories() {
+		return workflowCategories;
 	}
 
+	public WorkflowBuilder setWorkflowCategories(Set<WorkflowCategory> workflowCategories) {
+		this.workflowCategories = workflowCategories;
+		return this;
+	}
+
+	public Workflow build() {
+
+		return new Workflow(idWorkflow, name, description, status, associateWorkflows, workflowCategories);
+	}
 }
